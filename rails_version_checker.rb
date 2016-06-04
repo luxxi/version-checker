@@ -8,6 +8,7 @@ value = %x( gem search ^rails$ )
 pre = %x( gem search '^rails$' --pre )
 new_pre = (/(?<=\()(.*?)(?=\))/.match(pre)).to_s.split(', ').first
 new_version = /\d+\.\d+\.\d+/.match(value).to_s
+exit 1 if new_pre.nil? || new_version.nil?
 current = File.read(VERSION_FILE).split("\n")
 current_version, current_pre = current.first, current.last
 unless current_version == new_version && current_pre == new_pre
